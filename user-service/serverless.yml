@@ -1,0 +1,49 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: caotrinhthinh1234
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: user-service
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  # Uncomment to easily set up a custom domain. Read the docs for more details:
+  # https://www.serverless.com/framework/docs/providers/aws/guide/domains
+  # domain: api.example.com
+
+functions:
+  signup:
+    handler: app/handler.Signup
+    events:
+      - httpApi:
+          path: /signup
+          method: post
+
+  login:
+    handler: app/handler.Login
+    events:
+      - httpApi:
+          path: /login
+          method: post
+
+  verify:
+    handler: app/handler.Verify
+    events:
+      - httpApi:
+          path: /verify
+          method: post
+
+  profile:
+    handler: app/handler.Profile
+    events:
+      - httpApi:
+          path: /user
+          method: put
+      - httpApi:
+          path: /user
+          method: post
+      - httpApi:
+          path: /user
+          method: get
+
+plugins:
+  - serverless-offline
