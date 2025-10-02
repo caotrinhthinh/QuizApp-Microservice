@@ -6,6 +6,10 @@ service: user-service
 provider:
   name: aws
   runtime: nodejs20.x
+  versionFunctions: true
+stage: "dev"
+httpApi:
+  cors: true
   # Uncomment to easily set up a custom domain. Read the docs for more details:
   # https://www.serverless.com/framework/docs/providers/aws/guide/domains
   # domain: api.example.com
@@ -43,6 +47,32 @@ functions:
           method: post
       - httpApi:
           path: /user
+          method: get
+
+  cart:
+    handler: app/handler.Cart
+    events:
+      - httpApi:
+          path: /cart
+          method: post
+      - httpApi:
+          path: /cart
+          method: put
+      - httpApi:
+          path: /cart
+          method: get
+
+  payment:
+    handler: app/handler.Payment
+    events:
+      - httpApi:
+          path: /payment
+          method: post
+      - httpApi:
+          path: /payment
+          method: put
+      - httpApi:
+          path: /payment
           method: get
 
 plugins:
